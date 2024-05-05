@@ -4,6 +4,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -61,5 +62,10 @@ public class EmployeeServiceAspect {
 	@AfterReturning(value = "execution(* com.sample.springbootaop.service.impl.EmployeeServiceImpl.*(..))", returning = "employeeId")
 	public void afterReturningAdvice(JoinPoint joinPoint, String employeeId) {
 		LOGGER.info("After Returning Employee ID: " + employeeId);
+	}
+
+	@AfterThrowing(value = "execution(* com.sample.springbootaop.service.impl.EmployeeServiceImpl.*(..))", throwing = "ex")
+	public void afterThrowingAdvice(JoinPoint joinPoint, Exception ex) {
+		LOGGER.info("Exception is: " + ex.getMessage());
 	}
 }
